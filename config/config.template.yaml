@@ -1,0 +1,17 @@
+app:
+  name: absendulu-backend
+  version: 1.0.0
+  description: Backend service for Absendulu application
+  port: ${APP_PORT}
+  burst: ${RATELIMIT_BURST}
+  request_per_second: ${RATELIMIT_REQUEST_PER_SECOND}
+auth:
+  jwt_secret: ${JWT_SECRET}
+  refresh_token_secret: ${JWT_REFRESH_SECRET}
+  token_expiration: ${JWT_ACCESS_TOKEN_EXPIRATION} # in seconds
+  refresh_token_expiration: ${JWT_REFRESH_TOKEN_EXPIRATION} # in seconds
+  enforcer_duration_seconds: ${ENFORCER_DURATION_SECONDS}
+cache:
+  host: ${CACHE_HOST}
+  port: ${CACHE_PORT}
+  db: ${CACHE_DB}
