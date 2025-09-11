@@ -1,0 +1,37 @@
+name: deploy to vps
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.VPS_SSH_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -H ${{ secrets.VPS_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Deploy via SSH
+        run: |
+          ssh ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} << 'EOF'
+            cd /home/trevdev/apps/backend/trevelin-backend
+            git pull origin main
+            docker compose build --no-cache \
+              --build-arg APP_PORT="${{secrets.APP_PORT}}" \
+              --build-arg JWT_SECRET="${{secrets.JWT_SECRET}}"\
+              --build-arg JWT_REFRESH_SECRET="${{secrets.JWT_REFRESH_SECRET}}"\
+              --build-arg JWT_ACCESS_TOKEN_EXPIRATION="${{secrets.JWT_ACCESS_TOKEN_EXPIRATION}}"\
+              --build-arg JWT_REFRESH_TOKEN_EXPIRATION="${{secrets.JWT_REFRESH_TOKEN_EXPIRATION}}"\
+              --build-arg ENFORCER_DURATION_SECONDS="${{secrets.ENFORCER_DURATION_SECONDS}}"\
+              --build-arg CACHE_HOST="${{secrets.CACHE_HOST}}"\
+              --build-arg CACHE_PORT="${{secrets.CACHE_PORT}}"\
+              --build-arg CACHE_DB="${{secrets.CACHE_DB}}"\
+            docker compose down && docker compose up -d
+          EOF
