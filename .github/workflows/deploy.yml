@@ -20,18 +20,26 @@ jobs:
 
       - name: Deploy via SSH
         run: |
-          ssh ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} << 'EOF'
-            cd ~/absendulu/backend
-            git pull origin main
+          ssh -o StrictHostKeyChecking=yes ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} <<EOF
+            set -euo pipefail
+
+            cd ~/absendulu/backend   # sesuaikan path kalau compose.yml di subfolder
+
+            # Pastikan file compose ada
+            ls -la
+
+            # Build: HAPUS backslash di baris terakhir!
             docker compose build --no-cache \
-              --build-arg APP_PORT="${{secrets.APP_PORT}}" \
-              --build-arg JWT_SECRET="${{secrets.JWT_SECRET}}"\
-              --build-arg JWT_REFRESH_SECRET="${{secrets.JWT_REFRESH_SECRET}}"\
-              --build-arg JWT_ACCESS_TOKEN_EXPIRATION="${{secrets.JWT_ACCESS_TOKEN_EXPIRATION}}"\
-              --build-arg JWT_REFRESH_TOKEN_EXPIRATION="${{secrets.JWT_REFRESH_TOKEN_EXPIRATION}}"\
-              --build-arg ENFORCER_DURATION_SECONDS="${{secrets.ENFORCER_DURATION_SECONDS}}"\
-              --build-arg CACHE_HOST="${{secrets.CACHE_HOST}}"\
-              --build-arg CACHE_PORT="${{secrets.CACHE_PORT}}"\
-              --build-arg CACHE_DB="${{secrets.CACHE_DB}}"\
-            docker compose down && docker compose up -d
+              --build-arg APP_PORT="${{ secrets.APP_PORT }}" \
+              --build-arg JWT_SECRET="${{ secrets.JWT_SECRET }}" \
+              --build-arg JWT_REFRESH_SECRET="${{ secrets.JWT_REFRESH_SECRET }}" \
+              --build-arg JWT_ACCESS_TOKEN_EXPIRATION="${{ secrets.JWT_ACCESS_TOKEN_EXPIRATION }}" \
+              --build-arg JWT_REFRESH_TOKEN_EXPIRATION="${{ secrets.JWT_REFRESH_TOKEN_EXPIRATION }}" \
+              --build-arg ENFORCER_DURATION_SECONDS="${{ secrets.ENFORCER_DURATION_SECONDS }}" \
+              --build-arg CACHE_HOST="${{ secrets.CACHE_HOST }}" \
+              --build-arg CACHE_PORT="${{ secrets.CACHE_PORT }}" \
+              --build-arg CACHE_DB="${{ secrets.CACHE_DB }}"
+
+            docker compose down
+            docker compose up -d
           EOF
