@@ -56,9 +56,9 @@ func SetupRoutes(
 	mux.Use(middleware.RateLimit(cfg.App.RequestPerSecond, cfg.App.Burst))
 
 	// set prefix v1
-	mux.Route("/v1", func(r chi.Router) {
+	mux.Route("/", func(r chi.Router) {
 		// ROUTE TERITORY
-		r.Get("/health", health.Health)
+		r.Get("/", health.Health)
 	})
 
 	return mux
