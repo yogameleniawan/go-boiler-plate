@@ -4,10 +4,11 @@ import (
 	"github.com/go-chi/chi/v5"
 	"go.uber.org/dig"
 
-	"github.com/absendulu-project/backend/internal/health"
+	"github.com/absendulu-project/backend/internal/attendances"
 	"github.com/absendulu-project/backend/pkg/cache"
 	"github.com/absendulu-project/backend/pkg/router"
 	"github.com/absendulu-project/backend/pkg/server"
+	"github.com/absendulu-project/backend/pkg/supabase"
 )
 
 func New() (*dig.Container, error) {
@@ -20,16 +21,21 @@ func New() (*dig.Container, error) {
 		return nil, err
 	}
 
-	// health
-	if err := container.Provide(health.NewRepository); err != nil {
+	// supabase
+	if err := container.Provide(supabase.NewSupabaseClient); err != nil {
 		return nil, err
 	}
 
-	if err := container.Provide(health.NewService); err != nil {
+	// attendances
+	if err := container.Provide(attendances.NewRepository); err != nil {
 		return nil, err
 	}
 
-	if err := container.Provide(health.NewHandler); err != nil {
+	if err := container.Provide(attendances.NewService); err != nil {
+		return nil, err
+	}
+
+	if err := container.Provide(attendances.NewHandler); err != nil {
 		return nil, err
 	}
 

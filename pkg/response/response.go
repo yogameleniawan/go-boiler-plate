@@ -30,3 +30,7 @@ func ResponseJSON(w http.ResponseWriter, statusCode int, data interface{}) {
 		}
 	}
 }
+
+func ResponseError(w http.ResponseWriter, statusCode int, message string) {
+	ResponseJSON(w, statusCode, map[string]string{"error": message})
+}

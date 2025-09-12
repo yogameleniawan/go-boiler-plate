@@ -4,7 +4,7 @@ import (
 	"compress/zlib"
 	"net/http"
 
-	"github.com/absendulu-project/backend/internal/health"
+	"github.com/absendulu-project/backend/internal/attendances"
 	"github.com/absendulu-project/backend/pkg/middleware"
 	"github.com/absendulu-project/backend/pkg/response"
 	"github.com/go-chi/chi/v5"
@@ -17,7 +17,7 @@ import (
 //
 // parameters: all interface handlers we need to expose with rest
 func SetupRoutes(
-	health health.Handler,
+	attendances attendances.Handler,
 ) *chi.Mux {
 	mux := chi.NewRouter()
 
@@ -54,9 +54,20 @@ func SetupRoutes(
 	mux.Use(middleware.RateLimit(1000, 10))
 
 	// set prefix v1
-	mux.Route("/", func(r chi.Router) {
-		// ROUTE TERITORY
-		r.Get("/", health.Health)
+	mux.Route("/v1", func(r chi.Router) {
+		r.Route("/attendances", func(r chi.Router) {
+			r.Post("/", attendances.CreateAttendance)
+
+			r.Get("/", attendances.GetAttendanceList)
+
+			r.Route("/{id}", func(r chi.Router) {
+				r.Get("/", attendances.GetAttendanceByID)
+
+				r.Put("/", attendances.UpdateAttendance)
+
+				r.Delete("/", attendances.DeleteAttendance)
+			})
+		})
 	})
 
 	return mux

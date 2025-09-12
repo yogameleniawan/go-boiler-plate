@@ -9,6 +9,7 @@ import (
 
 	_ "github.com/golang-migrate/migrate/v4/database/postgres"
 	_ "github.com/golang-migrate/migrate/v4/source/file"
+	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
 
 	containerPkg "github.com/absendulu-project/backend/container"
@@ -35,6 +36,11 @@ func init() {
 }
 
 func main() {
+	err := godotenv.Load()
+	if err != nil {
+		log.Println("Warning: .env file not found")
+	}
+
 	// setup server
 	container, err := containerPkg.New()
 	if err != nil {
