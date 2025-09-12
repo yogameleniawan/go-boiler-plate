@@ -15,3 +15,6 @@ cache:
   host: ${CACHE_HOST}
   port: ${CACHE_PORT}
   db: ${CACHE_DB}
+supabase:
+  supabase_url: ${SUPABASE_URL}
+  supabase_key: ${SUPABASE_KEY}

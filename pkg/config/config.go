@@ -9,9 +9,10 @@ import (
 )
 
 type Config struct {
-	App           App           `yaml:"app"`
-	Auth          Auth          `yaml:"auth"`
-	Cache         Cache         `yaml:"cache"`
+	App      App      `yaml:"app"`
+	Auth     Auth     `yaml:"auth"`
+	Cache    Cache    `yaml:"cache"`
+	Supabase Supabase `yaml:"supabase"`
 }
 
 var (
