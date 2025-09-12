@@ -23,12 +23,17 @@ jobs:
           ssh -o StrictHostKeyChecking=yes ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} <<EOF
             set -euo pipefail
 
-            cd ~/absendulu/backend   # sesuaikan path kalau compose.yml di subfolder
+            cd ~/absendulu/backend
 
-            # Pastikan file compose ada
-            ls -la
+            if [ -d .git ]; then
+              git checkout main || true
+              git fetch --all --prune
+              git pull --ff-only origin main
+            else
+              echo "Direktori ini bukan repo git (~/absendulu/backend)."
+              exit 1
+            fi
 
-            # Build: HAPUS backslash di baris terakhir!
             docker compose build --no-cache \
               --build-arg APP_PORT="${{ secrets.APP_PORT }}" \
               --build-arg JWT_SECRET="${{ secrets.JWT_SECRET }}" \

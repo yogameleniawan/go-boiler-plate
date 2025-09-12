@@ -8,7 +8,6 @@ import (
 	"github.com/absendulu-project/backend/pkg/config"
 	"github.com/absendulu-project/backend/pkg/middleware"
 	"github.com/absendulu-project/backend/pkg/response"
-	"github.com/casbin/casbin/v2"
 	"github.com/go-chi/chi/v5"
 	cmiddleware "github.com/go-chi/chi/v5/middleware"
 	"github.com/unrolled/secure"
@@ -19,7 +18,6 @@ import (
 //
 // parameters: all interface handlers we need to expose with rest
 func SetupRoutes(
-	enforcer *casbin.Enforcer,
 	health health.Handler,
 ) *chi.Mux {
 	mux := chi.NewRouter()
