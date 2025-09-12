@@ -5,7 +5,6 @@ import (
 	"net/http"
 
 	"github.com/absendulu-project/backend/internal/health"
-	"github.com/absendulu-project/backend/pkg/config"
 	"github.com/absendulu-project/backend/pkg/middleware"
 	"github.com/absendulu-project/backend/pkg/response"
 	"github.com/go-chi/chi/v5"
@@ -22,7 +21,6 @@ func SetupRoutes(
 ) *chi.Mux {
 	mux := chi.NewRouter()
 
-	cfg := config.GetConfig()
 	// chi middleware
 	mux.Use(cmiddleware.Logger)
 	mux.Use(cmiddleware.Recoverer)
@@ -53,7 +51,7 @@ func SetupRoutes(
 	// set cors middleware
 	mux.Use(middleware.Cors())
 	// set middleware rate limiter
-	mux.Use(middleware.RateLimit(cfg.App.RequestPerSecond, cfg.App.Burst))
+	mux.Use(middleware.RateLimit(1000, 10))
 
 	// set prefix v1
 	mux.Route("/", func(r chi.Router) {
