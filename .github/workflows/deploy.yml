@@ -44,6 +44,9 @@ jobs:
               --build-arg CACHE_HOST="${{ secrets.CACHE_HOST }}" \
               --build-arg CACHE_PORT="${{ secrets.CACHE_PORT }}" \
               --build-arg CACHE_DB="${{ secrets.CACHE_DB }}"
+              \
+              --build-arg SUPABASE_KEY="${{ secrets.SUPABASE_KEY }}" \
+              --build-arg SUPABASE_URL="${{ secrets.SUPABASE_URL }}" \
 
             docker compose down
             docker compose up -d
