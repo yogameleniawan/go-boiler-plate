@@ -10,7 +10,6 @@ import (
 	_ "github.com/golang-migrate/migrate/v4/database/postgres"
 	_ "github.com/golang-migrate/migrate/v4/source/file"
 	_ "github.com/lib/pq"
-	"go.opentelemetry.io/otel/sdk/trace"
 
 	containerPkg "github.com/absendulu-project/backend/container"
 	"github.com/absendulu-project/backend/pkg/config"
@@ -83,7 +82,6 @@ func Start(
 func Shutdown(
 	quit chan os.Signal,
 	svr server.Server,
-	trace *trace.TracerProvider,
 ) {
 
 	q := <-quit
