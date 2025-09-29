@@ -4,11 +4,11 @@ import (
 	"github.com/go-chi/chi/v5"
 	"go.uber.org/dig"
 
-	"github.com/absendulu-project/backend/internal/attendances"
-	"github.com/absendulu-project/backend/pkg/cache"
-	"github.com/absendulu-project/backend/pkg/router"
-	"github.com/absendulu-project/backend/pkg/server"
-	"github.com/absendulu-project/backend/pkg/supabase"
+	"github.com/base-go/backend/internal/attendances"
+	"github.com/base-go/backend/pkg/cache"
+	"github.com/base-go/backend/pkg/router"
+	"github.com/base-go/backend/pkg/server"
+	"github.com/base-go/backend/pkg/supabase"
 )
 
 func New() (*dig.Container, error) {

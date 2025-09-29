@@ -4,9 +4,9 @@ import (
 	"compress/zlib"
 	"net/http"
 
-	"github.com/absendulu-project/backend/internal/attendances"
-	"github.com/absendulu-project/backend/pkg/middleware"
-	"github.com/absendulu-project/backend/pkg/response"
+	"github.com/base-go/backend/internal/attendances"
+	"github.com/base-go/backend/pkg/middleware"
+	"github.com/base-go/backend/pkg/response"
 	"github.com/go-chi/chi/v5"
 	cmiddleware "github.com/go-chi/chi/v5/middleware"
 	"github.com/unrolled/secure"

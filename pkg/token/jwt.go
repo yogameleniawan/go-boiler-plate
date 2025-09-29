@@ -5,8 +5,8 @@ import (
 
 	"github.com/golang-jwt/jwt/v5"
 
-	"github.com/absendulu-project/backend/pkg/config"
-	"github.com/absendulu-project/backend/pkg/constants"
+	"github.com/base-go/backend/pkg/config"
+	"github.com/base-go/backend/pkg/constants"
 )
 
 type JWTCustomClaims struct {

@@ -1,4 +1,4 @@
-module github.com/absendulu-project/backend
+module github.com/base-go/backend
 
 go 1.24.5
 

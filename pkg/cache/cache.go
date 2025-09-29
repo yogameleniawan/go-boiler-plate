@@ -8,7 +8,7 @@ import (
 
 	"github.com/redis/go-redis/v9"
 
-	"github.com/absendulu-project/backend/pkg/config"
+	"github.com/base-go/backend/pkg/config"
 )
 
 type Cache interface {

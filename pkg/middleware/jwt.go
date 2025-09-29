@@ -9,9 +9,9 @@ import (
 	"github.com/golang-jwt/jwt/v5"
 	"github.com/google/uuid"
 
-	"github.com/absendulu-project/backend/pkg/cache"
-	"github.com/absendulu-project/backend/pkg/config"
-	"github.com/absendulu-project/backend/pkg/response"
+	"github.com/base-go/backend/pkg/cache"
+	"github.com/base-go/backend/pkg/config"
+	"github.com/base-go/backend/pkg/response"
 )
 
 type Claims struct {

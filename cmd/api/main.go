@@ -12,9 +12,9 @@ import (
 	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
 
-	containerPkg "github.com/absendulu-project/backend/container"
-	"github.com/absendulu-project/backend/pkg/config"
-	"github.com/absendulu-project/backend/pkg/server"
+	containerPkg "github.com/base-go/backend/container"
+	"github.com/base-go/backend/pkg/config"
+	"github.com/base-go/backend/pkg/server"
 )
 
 var environtment string

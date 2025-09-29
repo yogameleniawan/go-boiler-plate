@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/absendulu-project/backend/internal/shared/models"
+	"github.com/base-go/backend/internal/shared/models"
 	"github.com/supabase-community/postgrest-go"
 	supabase "github.com/supabase-community/supabase-go"
 )

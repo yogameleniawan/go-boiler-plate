@@ -9,7 +9,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/absendulu-project/backend/pkg/config"
+	"github.com/base-go/backend/pkg/config"
 	"github.com/go-chi/chi/v5"
 )
 

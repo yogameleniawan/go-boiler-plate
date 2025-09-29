@@ -3,7 +3,7 @@ package supabase
 import (
 	"errors"
 
-	"github.com/absendulu-project/backend/pkg/config"
+	"github.com/base-go/backend/pkg/config"
 	supabase "github.com/supabase-community/supabase-go"
 )
 

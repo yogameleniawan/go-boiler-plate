@@ -5,8 +5,8 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/absendulu-project/backend/internal/shared/models"
-	"github.com/absendulu-project/backend/pkg/response"
+	"github.com/base-go/backend/internal/shared/models"
+	"github.com/base-go/backend/pkg/response"
 	"github.com/go-chi/chi/v5"
 )
 
